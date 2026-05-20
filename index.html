@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>520 小惊喜</title>
+  <title>给你的520小宇宙</title>
   <style>
     * {
       margin: 0;
@@ -15,45 +15,65 @@
       height: 100vh;
       overflow: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      align-items: center;
+      background: linear-gradient(135deg,#ff9a9e,#fecfef,#fad0c4);
+      background-size: 400% 400%;
+      animation: bgMove 12s ease infinite;
       font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
       position: relative;
     }
 
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     .heart {
       position: absolute;
-      color: rgba(255,255,255,0.7);
+      bottom: -50px;
+      color: rgba(255,255,255,0.75);
       animation: float 8s linear infinite;
-      font-size: 20px;
+      pointer-events: none;
+      text-shadow: 0 0 10px rgba(255,255,255,0.6);
     }
 
     @keyframes float {
-      0% {
-        transform: translateY(100vh) scale(0.5);
+      from {
+        transform: translateY(0) scale(0.5);
         opacity: 0;
       }
       20% {
         opacity: 1;
       }
-      100% {
-        transform: translateY(-120px) scale(1.4);
+      to {
+        transform: translateY(-120vh) scale(1.5);
         opacity: 0;
       }
     }
 
     .card {
-      width: 88%;
-      max-width: 420px;
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(12px);
-      border-radius: 28px;
-      padding: 38px 28px;
+      width: 90%;
+      max-width: 430px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      padding: 42px 28px;
       text-align: center;
       color: white;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-      animation: fadeIn 1.5s ease;
+      box-shadow: 0 12px 45px rgba(0,0,0,0.18);
+      animation: fadeIn 1.4s ease;
+      position: relative;
+      z-index: 10;
     }
 
     @keyframes fadeIn {
@@ -68,40 +88,55 @@
     }
 
     .title {
-      font-size: 34px;
-      margin-bottom: 18px;
+      font-size: 42px;
       font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 12px rgba(255,255,255,0.3);
     }
 
-    .text {
-      font-size: 18px;
-      line-height: 1.9;
+    .typing {
+      min-height: 120px;
+      font-size: 22px;
+      line-height: 2;
       margin-bottom: 28px;
+      white-space: pre-line;
+    }
+
+    .cursor {
+      display: inline-block;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
     }
 
     .btn {
       border: none;
       background: white;
-      color: #ff5c8a;
-      padding: 14px 28px;
+      color: #ff4f87;
+      padding: 15px 34px;
       border-radius: 999px;
-      font-size: 17px;
+      font-size: 18px;
       cursor: pointer;
-      transition: all 0.3s ease;
       font-weight: bold;
+      transition: all .3s ease;
+      box-shadow: 0 6px 20px rgba(255,255,255,0.35);
     }
 
     .btn:hover {
-      transform: scale(1.06);
+      transform: scale(1.08);
     }
 
-    .hidden {
-      margin-top: 26px;
+    .love {
+      margin-top: 28px;
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.8s ease;
-      font-size: 20px;
-      line-height: 1.8;
+      transform: translateY(25px);
+      transition: all 1s ease;
+      font-size: 22px;
+      line-height: 2;
     }
 
     .show {
@@ -110,48 +145,106 @@
     }
 
     .signature {
-      margin-top: 20px;
+      margin-top: 24px;
       font-size: 16px;
-      opacity: 0.9;
+      opacity: .92;
+    }
+
+    .music-tip {
+      margin-top: 14px;
+      font-size: 13px;
+      opacity: .8;
+    }
+
+    .glow {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.18);
+      filter: blur(90px);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
+  <div class="stars"></div>
+  <div class="glow"></div>
+
   <div class="card">
     <div class="title">520 ❤️</div>
-    <div class="text">
-      今天的风很温柔，<br>
-      阳光也刚刚好。<br><br>
-      但这些都不如——<br>
-      你出现在我的生活里。
-    </div>
+
+    <div id="typing" class="typing"></div>
 
     <button class="btn" onclick="showLove()">点我一下</button>
 
-    <div id="love" class="hidden">
-      我喜欢你，不止今天。<br>
-      是认真、坚定、想陪你很久的那种喜欢。<br><br>
-      以后每一个520，<br>
-      我都想和你一起过。 💖
+    <div id="love" class="love">
+      我喜欢你，真的喜欢了很久。<br>
+      不是一时心动，<br>
+      是每次想到你时，都会忍不住开心。<br><br>
+
+      如果可以的话——<br>
+      以后的晚风、奶茶、电影和日落，<br>
+      我都想和你一起。 ✨
 
       <div class="signature">
-        —— 来自一直偷偷喜欢你的人
+        —— 来自一个想陪你很久很久的人
+      </div>
+
+      <div class="music-tip">
+        🎵 建议打开音乐一起看
       </div>
     </div>
   </div>
 
+  <audio id="bgm" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=romantic-love-ambient-110228.mp3" type="audio/mp3">
+  </audio>
+
   <script>
+    const text = `今天的晚风很温柔。
+
+但这些都不如——
+你出现在我的生活里。`;
+
+    const typing = document.getElementById('typing');
+
+    let index = 0;
+
+    function typeWriter() {
+      if(index < text.length) {
+        typing.innerHTML = text.substring(0,index) + '<span class="cursor">|</span>';
+        index++;
+        setTimeout(typeWriter, 85);
+      } else {
+        typing.innerHTML = text;
+      }
+    }
+
+    typeWriter();
+
     function showLove() {
       document.getElementById('love').classList.add('show');
+
+      const music = document.getElementById('bgm');
+      music.play().catch(() => {});
+
+      for(let i = 0; i < 25; i++) {
+        setTimeout(createHeartBurst, i * 120);
+      }
     }
 
     function createHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.innerHTML = '❤';
+      heart.innerHTML = ['❤','💖','💕','💗'][Math.floor(Math.random()*4)];
+
       heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 24 + 16) + 'px';
       heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
-      heart.style.fontSize = (Math.random() * 20 + 16) + 'px';
+
       document.body.appendChild(heart);
 
       setTimeout(() => {
@@ -159,7 +252,24 @@
       }, 9000);
     }
 
-    setInterval(createHeart, 300);
+    function createHeartBurst() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '💖';
+
+      heart.style.left = (40 + Math.random() * 20) + 'vw';
+      heart.style.bottom = '40vh';
+      heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+      heart.style.animationDuration = '3s';
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 3000);
+    }
+
+    setInterval(createHeart, 320);
   </script>
 </body>
 </html>
